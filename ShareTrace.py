@@ -12,16 +12,13 @@ for i in range(NumberOfStocks):
     ticker = input(str(i+1) + ". Please input ticker:")
     tickers.append(ticker)
 
-
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'}
-
 xlApp = win32.Dispatch('Excel.Application')
 xlApp.Visible = True
 wb = xlApp.Workbooks.Add()
 
 for ticker in tickers:
     url = "https://www.marketwatch.com/investing/stock/{0}/company-profile".format(ticker)
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     profile_info = {}
